@@ -5,27 +5,48 @@ module.exports = {
 
     // Create 
     create (req, res){
-        let photoStringName = req.files;   
-        console.log("photo information",photoStringName);
 
-        req.body.photo = photoStringName.photo.name,
-        console.log("file upload name",req.body.photo);
-    
-        Apprentice.create(req.body)
-        .then(newApprentice => res.json({Apprentice: newApprentice}))
-        .catch((err) => {res.status(400).json(err);})
+        // Get file information  
+        let fileInfo = req.files;
+        console.log("File Information", fileInfo);
+        console.log("what info is here:", fileInfo.photo);
+
+        
+        // Check if a file has bee selected by user
+        if (!fileInfo || Object.keys(fileInfo).length === 0) {
+            return res.status(400).send('please select an image.');
+          }    
+          
+        // Make sure the image is a photo file
+        if (!fileInfo.photo.mimetype.startsWith('image')) {
+            return res.status(400).send(`Please upload an image file`, 400);
+        }
+
+        // Get File Name
+        req.body.photo = fileInfo.photo.name;
+
+
+
+        // Apprentice.create(req.body)
+        // .then(newApprentice => res.json({Apprentice: newApprentice}))
+        // .catch((err) => {res.status(400).json(err);})
+
+        let fileUpload = req.files.photo;
+
        
-        // if (!req.files || Object.keys(req.files).length === 0) {
-        //     return res.status(400).send('No files were uploaded.');
-        //   }     
+        // Use the mv() method to place the file somewhere on your server
+        fileUpload.mv('/somewhere/on/your/server/filename.jpg', function(err) {
+            if (err)
+            return res.status(500).send(err);
 
+            res.send('File uploaded!');
+        });
+        
+        
 
         // console.log("this is the data", res.body);
         // console.log("this is the files", res.files);
-
-
-
-    
+        console.log("can i log at the end will this run");
     },
     
     // delete 
