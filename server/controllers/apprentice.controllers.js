@@ -21,21 +21,33 @@ module.exports = {
             return res.status(400).send(`Please upload an image file`, 400);
         }
 
+       
+
         // get file name
         const fileName = req.files.photo.name
 
-        // change file name
-        req.body.photo = fileName;
+        // time stamp
+        const timeStamp = Date.now()
+        console.log("time stamp:",timeStamp);
+
+        // concatenate name and time stamp before saving to db
+        const saveName = timeStamp + fileName;
+        console.log("this is the name I want to save",saveName);
+
+        // change default name to new name
+        req.body.photo = saveName;
+        console.log("new file name:",saveName);
+        
         
         // add file name to the db
         Apprentice.create(req.body)
         .then(newApprentice => res.json({Apprentice: newApprentice}))
         .catch((err) => {res.status(400).json(err);})
 
-        const file = req.files.photo
-        const path = 'uploads/' + fileName
+        const fileData = req.files.photo
+        const path = 'uploads/' + saveName
         // Use the mv() method to place the file on your server
-        file.mv(path, function(err) {
+        fileData.mv(path, function(err) {
             if (err)
             return res.status(500).send(err);
 
