@@ -1,0 +1,51 @@
+body{
+  background: whitesmoke;
+  
+}
+.App {
+  display: grid;
+  background: white;
+  max-width: 65em;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+
+
+
+.main-container ul{
+  border-top: 2px lightgray solid;
+  list-style: none;
+
+}
+.main-container ul li{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr ;
+  align-items: center;
+}
+
+.options-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 5px;
+
+}
+
+.options-container button{
+  font: 1em sans-serif;
+  border: none;
+  padding: 10px;
+  width: 100px;
+  color: white;
+}
+
+
+.options-container :first-child{
+  background: rgb(208, 30, 30);
+
+}
+
+.options-container :last-child{
+  background: gray;
+
+}
