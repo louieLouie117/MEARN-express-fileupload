@@ -21,8 +21,16 @@ const DisplayApprentice = props => {
 
 
 
-    function deleteHandler() {
+    const deleteHandler = (deleteId)=> {
         console.log("delete button was click");
+        axios.delete("http://localhost:8000/api/apprentice/delete/" + deleteId)
+        .then((res)=>{
+            const filterApprentice = apprentice.filter((apprentice)=> {
+                return apprentice._id !== deleteId
+            });
+
+            setApprentice(filterApprentice);
+        })
   
         
     }
@@ -34,6 +42,10 @@ const DisplayApprentice = props => {
     return (
         <div className="main-container">
             <h1>All apprentice from db</h1>
+            <img src="/logo192.png" alt=""/>
+            <img src="./server/uploads/placeholder.png" alt=""/>
+
+
             {apprentice.map((apprentice)=>{
             return(
             
@@ -43,7 +55,7 @@ const DisplayApprentice = props => {
                     <p>{apprentice.question}</p>
                     <p>{apprentice.photo}</p>
                     <div className="options-container">
-                        <button onClick={deleteHandler}>Delete</button>
+                        <button onClick={()=>{deleteHandler(apprentice._id)}}>Delete</button>
                         <button>Edit</button>
                     </div>
 
