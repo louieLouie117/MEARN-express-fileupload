@@ -10,9 +10,7 @@ module.exports = {
         let fileInfo = req.files;
         console.log("File Information", fileInfo);
         console.log("what info is here:", fileInfo.photo);
-        
-
-        
+    
         // Check if a file has bee selected by user
         if (!fileInfo || Object.keys(fileInfo).length === 0) {
             return res.status(400).send('please select an image.');
@@ -23,22 +21,20 @@ module.exports = {
             return res.status(400).send(`Please upload an image file`, 400);
         }
 
+        // get file name
         const fileName = req.files.photo.name
-
-      
 
         // change file name
         req.body.photo = fileName;
         
-
+        // add file name to the db
         Apprentice.create(req.body)
         .then(newApprentice => res.json({Apprentice: newApprentice}))
         .catch((err) => {res.status(400).json(err);})
 
-
         const file = req.files.photo
         const path = 'uploads/' + fileName
-        // Use the mv() method to place the file somewhere on your server
+        // Use the mv() method to place the file on your server
         file.mv(path, function(err) {
             if (err)
             return res.status(500).send(err);
@@ -47,11 +43,6 @@ module.exports = {
         });
         
         console.log("path here",path);
-
-     
-
-     
-        
 
         // console.log("this is the data", res.body);
         // console.log("this is the files", res.files);
