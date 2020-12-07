@@ -13,3 +13,4 @@ module.exports= (dbName) => {
             console.log("Something went wrong when connecting to the database", err);
         })
 }
+

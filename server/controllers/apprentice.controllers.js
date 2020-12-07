@@ -10,6 +10,7 @@ module.exports = {
         let fileInfo = req.files;
         console.log("File Information", fileInfo);
         console.log("what info is here:", fileInfo.photo);
+        
 
         
         // Check if a file has bee selected by user
@@ -22,26 +23,34 @@ module.exports = {
             return res.status(400).send(`Please upload an image file`, 400);
         }
 
-        // Get File Name
-        req.body.photo = fileInfo.photo.name;
+        const fileName = req.files.photo.name
+
+      
+
+        // change file name
+        req.body.photo = fileName;
+        
+
+        Apprentice.create(req.body)
+        .then(newApprentice => res.json({Apprentice: newApprentice}))
+        .catch((err) => {res.status(400).json(err);})
 
 
-
-        // Apprentice.create(req.body)
-        // .then(newApprentice => res.json({Apprentice: newApprentice}))
-        // .catch((err) => {res.status(400).json(err);})
-
-        let fileUpload = req.files.photo;
-
-       
+        const file = req.files.photo
+        const path = 'uploads/' + fileName
         // Use the mv() method to place the file somewhere on your server
-        fileUpload.mv('/somewhere/on/your/server/filename.jpg', function(err) {
+        file.mv(path, function(err) {
             if (err)
             return res.status(500).send(err);
 
             res.send('File uploaded!');
         });
         
+        console.log("path here",path);
+
+     
+
+     
         
 
         // console.log("this is the data", res.body);
