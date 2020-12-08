@@ -55,3 +55,29 @@ body{
   background: gray;
 
 }
+
+.form-container form{
+  background: whitesmoke;
+  padding: 25px;
+  display: grid;
+  row-gap: 5px;
+
+}
+
+.form-container form input{
+  font: 1em sans-serif;
+  width: 400px;
+
+}
+
+
+.form-container form button{
+  background: rgb(57, 127, 192);
+  color: white;
+  border: none;
+  padding: 5px;
+  font: 1em sans-serif;
+  width: 100px;
+  margin-top: 20px;
+}
+

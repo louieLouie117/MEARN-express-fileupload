@@ -34,7 +34,7 @@ const DisplayApprentice = props => {
   
         
     }
-
+ 
     if(apprentice === null){return(<h2>Loading...</h2>)}
 
 
