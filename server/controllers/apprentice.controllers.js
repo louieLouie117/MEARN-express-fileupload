@@ -42,16 +42,17 @@ module.exports = {
         // add file name to the db
         Apprentice.create(req.body)
         .then(newApprentice => res.json({Apprentice: newApprentice}))
-        .catch((err) => {res.status(400).json(err);})
+        .catch((err) => { res.status(400).json(err);})
 
         const fileData = req.files.photo
-        const path = 'uploads/' + saveName
+        const path = '../client/public/uploads/' + saveName
         // Use the mv() method to place the file on your server
         fileData.mv(path, function(err) {
             if (err)
             return res.status(500).send(err);
 
-            res.send('File uploaded!');
+            // needs to return a status not a send
+            return res.status('File uploaded!');
         });
         
         console.log("path here",path);

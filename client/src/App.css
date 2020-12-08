@@ -18,10 +18,16 @@ body{
   list-style: none;
 
 }
+
+
 .main-container ul li{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
   align-items: center;
+}
+
+.main-container ul li img{
+  width: 300px;
 }
 
 .options-container{
