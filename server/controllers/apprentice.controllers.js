@@ -1,15 +1,17 @@
 const Apprentice = require("../models/apprentice.models");
 
+
 module.exports = {
 // CRUD operations
 
     // Create 
     create (req, res){
 
+    
         // Get file information  
         let fileInfo = req.files;
         console.log("File Information", fileInfo);
-        console.log("what info is here:", fileInfo.photo);
+        // console.log("what info is here:", fileInfo.name);
     
         // Check if a file has bee selected by user
         if (!fileInfo || Object.keys(fileInfo).length === 0) {
@@ -41,7 +43,10 @@ module.exports = {
         
         // add file name to the db
         Apprentice.create(req.body)
-        .then(newApprentice => res.json({Apprentice: newApprentice}))
+        .then(newApprentice => {
+            res.json({Apprentice: newApprentice})
+        
+        })
         .catch((err) => { res.status(400).json(err);})
 
         const fileData = req.files.photo
@@ -57,9 +62,7 @@ module.exports = {
         
         console.log("path here",path);
 
-        // console.log("this is the data", res.body);
-        // console.log("this is the files", res.files);
-        console.log("can i log at the end will this run");
+    
     },
     
     // delete 
