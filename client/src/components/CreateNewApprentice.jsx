@@ -55,7 +55,7 @@ const CreateNewApprentice = props => {
             })
             .catch((err)=>{
                 console.log("Errors", err);
-            })
+            }, [])
         
         }
     
