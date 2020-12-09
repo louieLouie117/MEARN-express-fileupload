@@ -9,7 +9,7 @@ module.exports = {
 
     
         // Get file information  
-        let fileInfo = req.files;
+        let fileInfo = req.files.file;
         console.log("File Information", fileInfo);
         // console.log("what info is here:", fileInfo.name);
     
@@ -19,14 +19,14 @@ module.exports = {
           }    
           
         // Make sure the image is a photo file
-        if (!fileInfo.photo.mimetype.startsWith('image')) {
+        if (!fileInfo.mimetype.startsWith('image')) {
             return res.status(400).send(`Please upload an image file`, 400);
         }
 
        
 
         // get file name
-        const fileName = req.files.photo.name
+        const fileName = req.files.file.name
 
         // time stamp
         const timeStamp = Date.now()
@@ -37,7 +37,7 @@ module.exports = {
         console.log("this is the name I want to save",saveName);
 
         // change default name to new name
-        req.body.photo = saveName;
+        req.body.file = saveName;
         console.log("new file name:",saveName);
         
         
@@ -49,7 +49,7 @@ module.exports = {
         })
         .catch((err) => { res.status(400).json(err);})
 
-        const fileData = req.files.photo
+        const fileData = req.files.file
         const path = '../client/public/uploads/' + saveName
         // Use the mv() method to place the file on your server
         fileData.mv(path, function(err) {

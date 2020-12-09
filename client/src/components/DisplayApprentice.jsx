@@ -50,7 +50,7 @@ const DisplayApprentice = props => {
                     <p>{apprentice.name}</p>
                     <p>{apprentice.question}</p>
                     {/* <p>{apprentice.photo}</p> */}
-                    <img src={"/uploads/" + apprentice.photo}/>
+                    <img src={"/uploads/" + apprentice.file}/>
                     <div className="options-container">
                         <button onClick={()=>{deleteHandler(apprentice._id)}}>Delete</button>
                         <button>Edit</button>

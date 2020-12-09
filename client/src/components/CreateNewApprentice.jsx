@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
+import fileUpload from 'express-fileupload';
 
 
 const CreateNewApprentice = props => {
@@ -8,7 +9,7 @@ const CreateNewApprentice = props => {
     const [question, setQuestion] = useState("");
     const [photo, setPhoto] = useState("")
     const [file, setFile] = useState("")
-
+    const [data, getFile] = useState({ name: "", path: "" });
 
     const onChange = e => {
         setFile(e.target.files[0]);
@@ -22,8 +23,8 @@ const CreateNewApprentice = props => {
 
     const submitHandler = (e)=>{      
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('photo', file);
+        const fd = new FormData();
+        fd.append('file', file);
      
         
         console.log("submit button was click");
@@ -31,21 +32,19 @@ const CreateNewApprentice = props => {
     
   
         
-        const newApprentice = {
-            name: name,
-            question: question,
-            photo: file,
-
-        }
-
-        console.log("name:",name);
-        console.log("question:",question);
-        console.log("photo:",photo);
+   
+        // console.log("name:",name);
+        // console.log("question:",question);
+        // console.log("photo:",photo);
         
 
         axios
-            .post("http://localhost:8000/api/apprentice", newApprentice)
+            .post("http://localhost:8000/api/apprentice", fd)
             .then((res)=> {
+                getFile({
+                    path:'http://localhost:8000/api/apprentice'+ res.data.path
+                });
+
                 console.log("the results", res)
                 console.log("res data here",res.data);
             })
@@ -58,7 +57,7 @@ const CreateNewApprentice = props => {
     return (
         <div className="form-container">
             <h1>add new photo</h1>
-            <form onSubmit= {e => {submitHandler(e)}}>
+            <form encType="multipart/form-data" onSubmit= {e => {submitHandler(e)}}>
                 <input 
                 type="text"
                 onChange={e => {setName(e.target.value)}}
