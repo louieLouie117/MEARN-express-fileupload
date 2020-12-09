@@ -40,7 +40,7 @@ const DisplayApprentice = props => {
 
     return (
         <div className="main-container">
-            <h1>All apprentice from db</h1>
+            <h1>Photo saved to db</h1>
 
             {apprentice.map((apprentice)=>{
             return(
