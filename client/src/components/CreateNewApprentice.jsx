@@ -29,8 +29,13 @@ const CreateNewApprentice = props => {
         
         console.log("submit button was click");
     
-    
-  
+        
+        // const newApprentice = {
+        //     name: name,
+        //     question: question,
+            
+
+        // }
         
    
         // console.log("name:",name);
@@ -56,7 +61,7 @@ const CreateNewApprentice = props => {
     
     return (
         <div className="form-container">
-            <h1>add new photo</h1>
+            <h2>add new photo</h2>
             <form encType="multipart/form-data" onSubmit= {e => {submitHandler(e)}}>
                 <input 
                 type="text"
@@ -68,12 +73,6 @@ const CreateNewApprentice = props => {
                 onChange={e => {setQuestion(e.target.value)}}
                 placeholder="why do you want to learn to code?"/>
                 
-
-                {/* <input 
-                type="file" 
-                name="photo"
-                // value={photo}
-                onChange={e => {setPhoto(imageHandler(e))}}/> */}
 
                 <input 
                 type="file" 

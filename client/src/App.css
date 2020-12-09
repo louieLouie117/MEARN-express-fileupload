@@ -10,6 +10,13 @@ body{
   padding: 40px;
 }
 
+h1{
+  margin-bottom: 0;
+}
+
+
+h2{
+  margin: 0;}
 
 
 
@@ -32,8 +39,8 @@ body{
 
 .options-container{
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 5px;
+  row-gap: 5px;
+  margin: 5px;
 
 }
 
