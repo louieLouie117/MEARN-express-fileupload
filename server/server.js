@@ -15,7 +15,7 @@ app.use(cors());
 app.use(fileUpload());
 
 // Set static folder
-app.use(express.static(path.join(__dirname, 'uploads')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 require("./router/apprentice.routers")(app);

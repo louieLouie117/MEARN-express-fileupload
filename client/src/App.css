@@ -10,6 +10,13 @@ body{
   padding: 40px;
 }
 
+h1{
+  margin-bottom: 0;
+}
+
+
+h2{
+  margin: 0;}
 
 
 
@@ -18,16 +25,22 @@ body{
   list-style: none;
 
 }
+
+
 .main-container ul li{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
   align-items: center;
 }
 
+.main-container ul li img{
+  width: 300px;
+}
+
 .options-container{
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 5px;
+  row-gap: 5px;
+  margin: 5px;
 
 }
 
@@ -49,3 +62,29 @@ body{
   background: gray;
 
 }
+
+.form-container form{
+  background: whitesmoke;
+  padding: 25px;
+  display: grid;
+  row-gap: 5px;
+
+}
+
+.form-container form input{
+  font: 1em sans-serif;
+  width: 400px;
+
+}
+
+
+.form-container form button{
+  background: rgb(57, 127, 192);
+  color: white;
+  border: none;
+  padding: 5px;
+  font: 1em sans-serif;
+  width: 100px;
+  margin-top: 20px;
+}
+

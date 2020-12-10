@@ -34,17 +34,13 @@ const DisplayApprentice = props => {
   
         
     }
-
+ 
     if(apprentice === null){return(<h2>Loading...</h2>)}
-
 
 
     return (
         <div className="main-container">
-            <h1>All apprentice from db</h1>
-            <img src="/logo192.png" alt=""/>
-            <img src="./server/uploads/placeholder.png" alt=""/>
-
+            <h1>Photo saved to db</h1>
 
             {apprentice.map((apprentice)=>{
             return(
@@ -53,7 +49,8 @@ const DisplayApprentice = props => {
                 <li>
                     <p>{apprentice.name}</p>
                     <p>{apprentice.question}</p>
-                    <p>{apprentice.photo}</p>
+                    {/* <p>{apprentice.photo}</p> */}
+                    <img src={"/uploads/" + apprentice.file}/>
                     <div className="options-container">
                         <button onClick={()=>{deleteHandler(apprentice._id)}}>Delete</button>
                         <button>Edit</button>

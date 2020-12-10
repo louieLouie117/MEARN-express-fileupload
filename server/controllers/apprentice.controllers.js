@@ -1,15 +1,17 @@
 const Apprentice = require("../models/apprentice.models");
 
+
 module.exports = {
 // CRUD operations
 
     // Create 
     create (req, res){
 
+    
         // Get file information  
-        let fileInfo = req.files;
+        let fileInfo = req.files.file;
         console.log("File Information", fileInfo);
-        console.log("what info is here:", fileInfo.photo);
+        // console.log("what info is here:", fileInfo.name);
     
         // Check if a file has bee selected by user
         if (!fileInfo || Object.keys(fileInfo).length === 0) {
@@ -17,14 +19,14 @@ module.exports = {
           }    
           
         // Make sure the image is a photo file
-        if (!fileInfo.photo.mimetype.startsWith('image')) {
+        if (!fileInfo.mimetype.startsWith('image')) {
             return res.status(400).send(`Please upload an image file`, 400);
         }
 
        
 
         // get file name
-        const fileName = req.files.photo.name
+        const fileName = req.files.file.name
 
         // time stamp
         const timeStamp = Date.now()
@@ -35,30 +37,37 @@ module.exports = {
         console.log("this is the name I want to save",saveName);
 
         // change default name to new name
-        req.body.photo = saveName;
+        req.body.file = saveName;
         console.log("new file name:",saveName);
-        
-        
-        // add file name to the db
-        Apprentice.create(req.body)
-        .then(newApprentice => res.json({Apprentice: newApprentice}))
-        .catch((err) => {res.status(400).json(err);})
+        // req.body.name= fileName
+        // req.body.question= "Server side question"
 
-        const fileData = req.files.photo
-        const path = 'uploads/' + saveName
+        
         // Use the mv() method to place the file on your server
+        const fileData = req.files.file
+        const path = '../client/public/uploads/' + saveName
         fileData.mv(path, function(err) {
             if (err)
             return res.status(500).send(err);
 
-            res.send('File uploaded!');
+            // needs to return a status not a send
+            return res.status('File uploaded!');
         });
         
         console.log("path here",path);
+        
+        // add file name to the db
+        Apprentice.create(req.body)
+        .then(newApprentice => {
+            res.json({Apprentice: newApprentice})
+        
+        })
+        .catch((err) => { res.status(400).json(err);})
 
-        // console.log("this is the data", res.body);
-        // console.log("this is the files", res.files);
-        console.log("can i log at the end will this run");
+
+        
+
+    
     },
     
     // delete 
