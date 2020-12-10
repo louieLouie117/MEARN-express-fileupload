@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import fileUpload from 'express-fileupload';
 
 
 const CreateNewApprentice = props => {
@@ -16,47 +15,27 @@ const CreateNewApprentice = props => {
         setPhoto(e.target.files[0].name);
         console.log("file:",file);
         console.log("photo:",photo);
-
-
       };
 
 
     const submitHandler = (e)=>{      
         e.preventDefault();
+        // data from Form/models
         const fd = new FormData();
         fd.append('file', file);
         fd.append('name', name);
         fd.append('question', question);
 
-     
-        
-        console.log("this is the form data:", file);
-
-        
-   
-        // console.log("name:",name);
-        // console.log("question:",question);
-        // console.log("photo:",photo);
-        
-
-        axios
-            .post("http://localhost:8000/api/apprentice",  fd, {
+        // 
+        axios.post("http://localhost:8000/api/apprentice",  fd, {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                  }
-     
-                  
-            } )
-            
+                  }             
+            })
             .then((res)=> {
-                
-                
-
                 getFile({
                     path:'http://localhost:8000/api/apprentice'+ res.data.path
                 });
-
-                console.log("the results", res)
                 console.log("res data here",res.data);
             })
             .catch((err)=>{
