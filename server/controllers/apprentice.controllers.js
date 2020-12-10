@@ -39,19 +39,13 @@ module.exports = {
         // change default name to new name
         req.body.file = saveName;
         console.log("new file name:",saveName);
-        
-        
-        // add file name to the db
-        Apprentice.create(req.body)
-        .then(newApprentice => {
-            res.json({Apprentice: newApprentice})
-        
-        })
-        .catch((err) => { res.status(400).json(err);})
+        // req.body.name= fileName
+        // req.body.question= "Server side question"
 
+        
+        // Use the mv() method to place the file on your server
         const fileData = req.files.file
         const path = '../client/public/uploads/' + saveName
-        // Use the mv() method to place the file on your server
         fileData.mv(path, function(err) {
             if (err)
             return res.status(500).send(err);
@@ -61,6 +55,17 @@ module.exports = {
         });
         
         console.log("path here",path);
+        
+        // add file name to the db
+        Apprentice.create(req.body)
+        .then(newApprentice => {
+            res.json({Apprentice: newApprentice})
+        
+        })
+        .catch((err) => { res.status(400).json(err);})
+
+
+        
 
     
     },

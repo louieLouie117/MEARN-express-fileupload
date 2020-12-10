@@ -25,17 +25,13 @@ const CreateNewApprentice = props => {
         e.preventDefault();
         const fd = new FormData();
         fd.append('file', file);
+        fd.append('name', name);
+        fd.append('question', question);
+
      
         
-        console.log("submit button was click");
-    
-        
-        // const newApprentice = {
-        //     name: name,
-        //     question: question,
-            
+        console.log("this is the form data:", file);
 
-        // }
         
    
         // console.log("name:",name);
@@ -44,8 +40,18 @@ const CreateNewApprentice = props => {
         
 
         axios
-            .post("http://localhost:8000/api/apprentice", fd)
+            .post("http://localhost:8000/api/apprentice",  fd, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                  }
+     
+                  
+            } )
+            
             .then((res)=> {
+                
+                
+
                 getFile({
                     path:'http://localhost:8000/api/apprentice'+ res.data.path
                 });
